@@ -7,6 +7,7 @@ const {
 
 const router = require("express").Router();
 
+// UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
@@ -64,7 +65,6 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 // GET USER STATS
-
 router.get("/starts", verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
