@@ -1,4 +1,6 @@
 import React from "react";
+import Pay from "";
+import Success from "";
 
 const App = () => {
   return (
