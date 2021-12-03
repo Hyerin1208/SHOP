@@ -7,6 +7,7 @@ const KEY =
 
 const Pay = () => {
   const [stripeToken, setStripeToken] = useState(null);
+  const history = useHistory();
 
   const onToken = () => {
     setStripeToken(token);
@@ -23,12 +24,13 @@ const Pay = () => {
           }
         );
         console.log(res.data);
+        history.push("/success");
       } catch (err) {
         console.log(err);
       }
     };
     stripeToken && makeRequest;
-  }, [stripeToken]);
+  }, [stripeToken, history]);
 
   return (
     <div
@@ -39,31 +41,35 @@ const Pay = () => {
         justifyContent: "center",
       }}
     >
-      <StripeCheckout
-        name="Hyerin Shop"
-        image="https://postfiles.pstatic.net/MjAxOTA2MTlfMTEz/MDAxNTYwOTI3NzQ1MDg0.mV3YSPFuFYgwBCNdXh8088RV2MbHAqGf7wRnNr7DmDYg.SWdTlcL1IAKEOA6AOW6bzIQSQTk7iwL2oTVyipTDiKUg.JPEG.lilia94/IMG_0611.JPG?type=w773"
-        billingAddress
-        shippingAddress
-        description="Your total is $20"
-        amount={2000}
-        token={onToken}
-        stripeKey={KEY}
-      >
-        <button
-          style={{
-            border: "none",
-            width: 120,
-            borderRadius: 5,
-            padding: "20px",
-            backgroundColor: "black",
-            color: "white",
-            fontWeight: "600",
-            cursor: "pointer",
-          }}
+      {stripeToken ? (
+        <span>Processing. Please wait...</span>
+      ) : (
+        <StripeCheckout
+          name="Hyerin Shop"
+          image="https://postfiles.pstatic.net/MjAxOTA2MTlfMTEz/MDAxNTYwOTI3NzQ1MDg0.mV3YSPFuFYgwBCNdXh8088RV2MbHAqGf7wRnNr7DmDYg.SWdTlcL1IAKEOA6AOW6bzIQSQTk7iwL2oTVyipTDiKUg.JPEG.lilia94/IMG_0611.JPG?type=w773"
+          billingAddress
+          shippingAddress
+          description="Your total is $20"
+          amount={2000}
+          token={onToken}
+          stripeKey={KEY}
         >
-          Pay Now
-        </button>
-      </StripeCheckout>
+          <button
+            style={{
+              border: "none",
+              width: 120,
+              borderRadius: 5,
+              padding: "20px",
+              backgroundColor: "black",
+              color: "white",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
+          >
+            Pay Now
+          </button>
+        </StripeCheckout>
+      )}
     </div>
   );
 };
