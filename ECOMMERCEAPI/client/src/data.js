@@ -3,7 +3,7 @@ export const sliderItems = [
     id: 1,
     img: "/image/pngwing.com (1).png",
     title: "블랙 프라이데이 세일",
-    desc: "전 품목 10%세일, 12/6 - 12/9 pm11:59 자세한 내용은 꼭! 클릭하여 확인해 주세요",
+    desc: "전 품목 10%세일, 12/6 - 12/9 자세한 내용은 꼭! 클릭하여 확인",
     bg: "f5fafd",
   },
   {
@@ -18,6 +18,6 @@ export const sliderItems = [
     img: "/image/pngwing.com.png",
     title: "Wish-list-worthy gifts",
     desc: "Delve into our gifting dreamland",
-    bg: "fbf0f4",
+    bg: "f5ebfc",
   },
 ];
