@@ -2,13 +2,16 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
+import { useState } from "react";
 import styled from "styled-components";
+import { sliderItems } from "../data";
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   position: relative;
+  overflow: hidden;
 `;
 
 const Arrow = styled.div`
@@ -26,10 +29,13 @@ const Arrow = styled.div`
   margin: auto;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 2;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
+  display: flex;
+  transform: translateX(0vw);
 `;
 
 const Slide = styled.div`
@@ -37,7 +43,9 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  background-color: #${(props) => props.bg};
 `;
+
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
@@ -72,27 +80,28 @@ const Button = styled.button`
 `;
 
 const slider = () => {
+  // const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {};
   return (
     <Container>
-      <Arrow direction="left">
+      <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowBackIosOutlined />
       </Arrow>
       <Wrapper>
-        <Slide>
-          <ImgContainer>
-            <Image src="//www.net-a-porter.com/variants/images/22250442025885711/fr/w2000_q60.jpg" />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>블랙 프라이데이 세일</Title>
-            <Desc>
-              전 품목 10%세일, 12/6 - 12/9 pm11:59 자세한 내용은 꼭! 클릭하여
-              확인해 주세요
-            </Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg}>
+            <ImgContainer>
+              <Image src={item.img} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button>SHOW NOW</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
       </Wrapper>
-      <Arrow direction="right">
+      <Arrow direction="right" onClick={() => handleClick("right")}>
         <ArrowForwardIosOutlined />
       </Arrow>
     </Container>
