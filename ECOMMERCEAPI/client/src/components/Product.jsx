@@ -39,10 +39,26 @@ const Info = styled.div`
   background-color: gray;
   z-index: 3;
   display: flex;
-  ali
+  align-items: center;
+  justify-content: center;
 `;
 
-const Icon = styled.div``;
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.1);
+  }
+`;
 
 const Product = ({ item }) => {
   return (
