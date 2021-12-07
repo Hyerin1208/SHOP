@@ -5,6 +5,9 @@ import { Badge } from "@material-ui/core";
 
 const Container = styled.div`
   height: 60px;
+  @media only screen and (max-width: 380px) {
+    display: none;
+  }
 `;
 
 const Wrapper = styled.div`
