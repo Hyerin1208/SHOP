@@ -3,7 +3,6 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
-import Product from "./Product";
 import { Add, Remove } from "@material-ui/icons";
 
 const Container = styled.div``;
