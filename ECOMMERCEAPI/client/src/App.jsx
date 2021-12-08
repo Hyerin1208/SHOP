@@ -1,12 +1,37 @@
+import React from "react";
 import Product from "./pages/Product";
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Redirect, useNavigate } from "react-router";
 
 const App = () => {
-  return <Home />;
+  const user = true;
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/products/:category">
+          <ProductList />
+        </Route>
+        <Route path="/products/:id">
+          <Product />
+        </Route>
+        <Route path="/cart">
+          <Cart />
+        </Route>
+        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+      </Switch>
+    </Router>
+  );
 };
 
 export default App;
