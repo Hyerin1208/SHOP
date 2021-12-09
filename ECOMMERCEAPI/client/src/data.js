@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: "https://www.net-a-porter.com/content/images/cms/ycm/resource/blob/700462/fce766c57f3fd5a3aa25a40d9b7ee92f/incrediblejewels-mobilehptriopromo2-1200x900-data.jpg/w800_q80.jpg",
     title: "LOULOU STUDIO",
+    cat: "women",
   },
   {
     id: 2,
     img: "https://www.net-a-porter.com/content/images/cms/ycm/resource/blob/700396/f47df2c29b263539e4c481f7606aa923/party-mobilehpduopromo1-1200x900-data.jpg/w800_q80.jpg",
     title: "Dress the part(y)",
+    cat: "coat",
   },
   {
     id: 3,
     img: "https://www.net-a-porter.com/content/images/cms/ycm/resource/blob/701552/4297c20eecfe34613296d39333ff0c0a/mobile-single-promo-1200x900-data.jpg/w800_q80.jpg",
     title: "Holiday styles",
+    cat: "jeans",
   },
 ];
 
