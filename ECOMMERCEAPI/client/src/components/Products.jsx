@@ -13,8 +13,9 @@ const Container = styled.div`
 
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]); // 첨에는 빈배열
-  const [filteredProducts, setFilterdProducts] = useState([]); // 필터링된 제품 업데이트하고 표시
+  const [filteredProducts, setFilteredProducts] = useState([]); // 필터링된 제품 업데이트하고 표시
   // api 에서 제품을 가져오는 것이기에 axios라이브러리 사용
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -34,7 +35,7 @@ const Products = ({ cat, filters, sort }) => {
 
   useEffect(() => {
     cat &&
-      setFilterdProducts(
+      setFilteredProducts(
         // 객체와 배열을 필터링하는 방법
         products.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
@@ -46,13 +47,17 @@ const Products = ({ cat, filters, sort }) => {
 
   useEffect(() => {
     if (sort === "newest") {
-      setFilterdProducts((prev) =>
+      setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.createdAt - b.createdAt)
       );
     } else if (sort === "asc") {
-      setFilterdProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.price - b.price)
+      );
     } else {
-      setFilterdProducts((prev) => [...prev].sort((a, b) => b.price - a.price));
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
     }
   }, [sort]);
 
@@ -61,7 +66,7 @@ const Products = ({ cat, filters, sort }) => {
       {cat
         ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
         : products
-            .slice(0, 8) // 8개의항목만 보이게 (배열을 슬라이스)
+            .slice(0, 8)
             .map((item) => <Product item={item} key={item.id} />)}
     </Container>
   );
