@@ -12,53 +12,57 @@ const Container = styled.div`
 `;
 
 const Products = ({ cat, filters, sort }) => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilterdProducts] = useState([]);
+  console.log(cat, filters, sort);
+  // const [products, setProducts] = useState([]);
+  // const [filteredProducts, setFilterdProducts] = useState([]);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get(
-          cat
-            ? `http://localhost:5000/api/products?category=${cat}`
-            : "http://localhost:5000/api/products"
-        );
-        console.log(res);
-      } catch (err) {}
-    };
-    getProducts();
-  }, [cat]);
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         cat
+  //           ? `http://localhost:5000/api/products?category=${cat}`
+  //           : "http://localhost:5000/api/products"
+  //       );
+  //       console.log(res);
+  //     } catch (err) {}
+  //   };
+  //   getProducts();
+  // }, [cat]);
 
-  useEffect(() => {
-    cat &&
-      setFilterdProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
-          )
-        )
-      );
-  }, [products, cat, filters]);
+  // useEffect(() => {
+  //   cat &&
+  //     setFilterdProducts(
+  //       products.filter((item) =>
+  //         Object.entries(filters).every(([key, value]) =>
+  //           item[key].includes(value)
+  //         )
+  //       )
+  //     );
+  // }, [products, cat, filters]);
 
-  useEffect(() => {
-    if (sort === "newest") {
-      setFilterdProducts((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      );
-    } else if (sort === "asc") {
-      setFilterdProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
-    } else {
-      setFilterdProducts((prev) => [...prev].sort((a, b) => b.price - a.price));
-    }
-  }, [sort]);
+  // useEffect(() => {
+  //   if (sort === "newest") {
+  //     setFilterdProducts((prev) =>
+  //       [...prev].sort((a, b) => a.createdAt - b.createdAt)
+  //     );
+  //   } else if (sort === "asc") {
+  //     setFilterdProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
+  //   } else {
+  //     setFilterdProducts((prev) => [...prev].sort((a, b) => b.price - a.price));
+  //   }
+  // }, [sort]);
 
   return (
     <Container>
-      {cat
+      {popularProducts.map((item) => (
+        <Product item={item} key={item.id} />
+      ))}
+      {/* {cat
         ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
         : products
             .slice(0, 8)
-            .map((item) => <Product item={item} key={item.id} />)}
+            .map((item) => <Product item={item} key={item.id} />)} */}
     </Container>
   );
 };
