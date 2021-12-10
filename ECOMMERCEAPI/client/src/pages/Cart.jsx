@@ -1,12 +1,14 @@
 import { Add, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
+import { userRequest } from "../requestMethods";
+import { useHistory } from "react-router";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -161,11 +163,28 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+  const history = useHistory();
 
   const onToken = (token) => {
     setStripeToken(token);
   };
-  console.log(stripeToken);
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          // stripeToken은 객체이고, id만 보내기
+          tokenId: stripeToken.id,
+          // amount: cart.total * 100,
+          amout: 500, // 테스트 용
+        });
+        history.push("/success", { data: res.data });
+      } catch {}
+    };
+    stripeToken && makeRequest();
+    // stripeToken && cart.total >= 1 && makeRequest();
+  }, [stripeToken, cart.total, history]);
+
   return (
     <Container>
       <Navbar />
